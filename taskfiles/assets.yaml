@@ -9,8 +9,8 @@ tasks:
       - ./src/fonts/**/*
       - ./src/images/**/*
     generates:
-      - ./dist/fonts/**/*
-      - ./dist/images/**/*
+      - ./dist/fonts/*
+      - ./dist/images/*
     cmds:
       - rm -rf ./dist/fonts
       - rm -rf .dist/images

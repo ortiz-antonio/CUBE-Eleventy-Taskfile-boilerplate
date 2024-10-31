@@ -10,6 +10,9 @@ tasks:
 
   site:
     deps: [assets]
+    generates:
+      - dist/index.html
+      - dist/css/global.css
     sources:
       - src/_includes/**/*.{njk}
       - src/css/**/*.css
