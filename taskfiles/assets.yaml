@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  clean:
+    cmds:
+      - rm -rf ./dist
+      - mkdir ./dist
+
+  build:
+    deps: [clean]
+    cmds:
+      - cp -r ./src/fonts ./dist
+      - cp -r ./src/images ./dist

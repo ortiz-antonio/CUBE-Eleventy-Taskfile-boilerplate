@@ -1,0 +1,36 @@
+version: '3'
+
+includes:
+  assets: ./assets.yaml
+
+tasks:
+  default:
+    cmds:
+      - task build:prod
+
+  site:
+    cmds:
+      - pnpm eleventy
+
+  postcss:
+    cmds:
+      - pnpm postcss src/css/global.css -o dist/css/global.css
+
+  prod:
+    sources:
+      - src/_includes/**/*.{njk}
+      - src/css/**/*.css
+    generates:
+      - dist/css/global.css
+      - dist/index.html
+    cmds:
+      - task build:assets:build
+      - task build:site
+      - task build:postcss
+      - task build:format
+
+  format:
+    sources:
+      - dist/**/*.{css, html}
+    cmds:
+      - prettier ./dist --write

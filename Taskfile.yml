@@ -1,0 +1,55 @@
+version: '3'
+
+includes:
+  dev: ./taskfiles/dev.yaml
+
+  build: ./taskfiles/prod.yaml
+
+tasks:
+  default:
+    - task -a
+
+  deploy:
+    deps: [build, check:commits]
+    cmds:
+      - git subtree push --prefix dist origin deploy
+
+  setup:
+    run: once
+    cmds:
+      - echo "Installing deps for project, volta, node, pnpm, prettier"
+      - curl https://get.volta.sh | bash
+      - volta install node
+      - volta install pnpm
+      - volta install prettier
+
+  install:
+    deps: [setup]
+    source: package.json
+    cmds:
+      - echo "Installing package.json deps"
+      - pnpm install
+
+  check:commits:
+    silent: true
+    cmds:
+      - |
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "Error: There are uncommitted changes in your Git repository."
+          exit 1
+        fi
+
+  lint:
+    sources:
+      - src/_includes/**/*.{njk}
+      - src/css/**/*.css
+
+    cmds:
+      - pnpm stylelint src/css/**/*.css --fix
+
+  format:
+    sources:
+      - src/_includes/**/*.{njk}
+      - src/css/**/*.css
+    cmds:
+      - prettier ./ --write

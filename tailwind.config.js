@@ -77,7 +77,7 @@ module.exports = {
   // Prevents Tailwind's core components
   blocklist: ['container'],
 
-  // Prevents Tailwind from generating that wall of empty custom properties 
+  // Prevents Tailwind from generating that wall of empty custom properties
   experimental: {
     optimizeUniversalDefaults: true
   },
