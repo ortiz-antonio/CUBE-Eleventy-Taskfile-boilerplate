@@ -10,7 +10,7 @@ tasks:
     - task -a
 
   deploy:
-    deps: [build, check:commits]
+    deps: [clean, build, check:commits]
     cmds:
       - git add -f dist
       - git commit -m "Temp commit for deploy" --no-verify
@@ -56,3 +56,8 @@ tasks:
       - src/css/**/*.css
     cmds:
       - prettier ./ --write
+
+  clean:
+    cmds:
+      - rm -rf ./dist
+      - mkdir ./dist

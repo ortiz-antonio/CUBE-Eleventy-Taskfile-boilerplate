@@ -1,13 +1,18 @@
 version: '3'
 
 tasks:
-  clean:
-    cmds:
-      - rm -rf ./dist
-      - mkdir ./dist
+  default:
+    deps: [assets]
 
-  build:
-    deps: [clean]
+  assets:
+    sources:
+      - ./src/fonts/**/*
+      - ./src/images/**/*
+    generates:
+      - ./dist/fonts/**/*
+      - ./dist/images/**/*
     cmds:
+      - rm -rf ./dist/fonts
+      - rm -rf .dist/images
       - cp -r ./src/fonts ./dist
       - cp -r ./src/images ./dist

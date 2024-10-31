@@ -9,28 +9,40 @@ tasks:
       - task build:prod
 
   site:
+    deps: [assets]
+    sources:
+      - src/_includes/**/*.{njk}
+      - src/css/**/*.css
     cmds:
       - pnpm eleventy
+      - task build:postcss
 
   postcss:
     cmds:
       - pnpm postcss src/css/global.css -o dist/css/global.css
 
   prod:
-    sources:
-      - src/_includes/**/*.{njk}
-      - src/css/**/*.css
-    generates:
-      - dist/css/global.css
-      - dist/index.html
     cmds:
-      - task build:assets:build
       - task build:site
-      - task build:postcss
       - task build:format
 
   format:
     sources:
-      - dist/**/*.{css, html}
+      - dist/css/*.css
+      - dist/*.html
+    generates:
+      - dist/css/*.css
+      - dist/*.html
+    deps:
+      - lint
+      - prettier
+
+  prettier:
+    silent: true
     cmds:
       - prettier ./dist --write
+  lint:
+    silent: true
+    cmds:
+      - pnpm stylelint dist/css/*.css --fix
+      - pnpm stylelint dist/*.html --fix

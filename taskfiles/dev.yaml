@@ -18,7 +18,6 @@ tasks:
     silent: false
 
   postcss:
-    sources:
     cmds:
       - pnpm postcss src/css/global.css -o dist/css/global.css --watch
     daemon: true
