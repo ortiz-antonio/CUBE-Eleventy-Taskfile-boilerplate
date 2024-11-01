@@ -9,7 +9,7 @@ tasks:
       - task dev:start
 
   start:
-    deps: [assets:build, postcss, serve]
+    deps: [assets, postcss, serve]
 
   serve:
     cmds:

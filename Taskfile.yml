@@ -10,7 +10,7 @@ tasks:
     - task -a
 
   deploy:
-    deps: [clean, build, check:commits]
+    deps: [build, check:commits]
     cmds:
       - git add -f dist
       - git commit -m "Temp commit for deploy" --no-verify
@@ -18,17 +18,15 @@ tasks:
       - git reset HEAD~1
 
   setup:
-    run: once
     cmds:
-      - echo "Installing deps for project, volta, node, pnpm, prettier"
       - curl https://get.volta.sh | bash
       - volta install node
       - volta install pnpm
-      - volta install prettier
 
   install:
-    deps: [setup]
     source: package.json
+    generates:
+      - pnpm-lock.yaml
     cmds:
       - echo "Installing package.json deps"
       - pnpm install
@@ -55,7 +53,7 @@ tasks:
       - src/_includes/**/*.{njk}
       - src/css/**/*.css
     cmds:
-      - prettier ./ --write
+      - pnpm prettier ./ --write
 
   clean:
     cmds:

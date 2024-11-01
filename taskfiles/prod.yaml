@@ -43,7 +43,7 @@ tasks:
   prettier:
     silent: true
     cmds:
-      - prettier ./dist --write
+      - pnpm prettier ./dist --write
   lint:
     silent: true
     cmds:
