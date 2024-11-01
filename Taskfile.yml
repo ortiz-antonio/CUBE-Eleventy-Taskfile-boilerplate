@@ -10,7 +10,7 @@ tasks:
     - task -a
 
   deploy:
-    deps: [build, check:commits]
+    deps: [format, build]
     cmds:
       - git add -f dist
       - git commit -m "Temp commit for deploy" --no-verify
@@ -31,14 +31,30 @@ tasks:
       - echo "Installing package.json deps"
       - pnpm install
 
-  check:commits:
-    silent: true
+  # check:commits:
+  #   silent: true
+  #   cmds:
+  #     - |
+  #       if [[ -n $(git status --porcelain) ]]; then
+  #         echo "Error: There are uncommitted changes in your Git repository."
+  #         exit 1
+  #       fi
+
+  clean:
     cmds:
-      - |
-        if [[ -n $(git status --porcelain) ]]; then
-          echo "Error: There are uncommitted changes in your Git repository."
-          exit 1
-        fi
+      - rm -rf ./dist
+      - mkdir ./dist
+
+  format:
+    sources:
+      - src/_includes/**/*.{njk}
+      - src/css/**/*.css
+    generates:
+      - dist/css/*.css
+      - dist/*.html
+    deps:
+      - lint
+      - prettier
 
   lint:
     sources:
@@ -48,14 +64,9 @@ tasks:
     cmds:
       - pnpm stylelint src/css/**/*.css --fix
 
-  format:
+  prettier:
     sources:
       - src/_includes/**/*.{njk}
       - src/css/**/*.css
     cmds:
       - pnpm prettier ./ --write
-
-  clean:
-    cmds:
-      - rm -rf ./dist
-      - mkdir ./dist
