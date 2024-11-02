@@ -70,3 +70,8 @@ tasks:
       - src/css/**/*.css
     cmds:
       - pnpm prettier ./ --write
+
+  utopia:
+    cmds:
+      - node utopia.local/src/index.js
+      - pnpm prettier src/design-tokens/
