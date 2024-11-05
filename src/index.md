@@ -1,10 +1,8 @@
 ---
 
 title: "CUBE, Eleventy boilerplate"
-subtitle: "A heading and paragraph in two columns"
-summary: "Donec sed odio dui. Donec sed odio dui. Vivamus sagittis lacus vel augue laoreet
-rutrum faucibus dolor auctor. Vivamus sagittis lacus vel augue laoreet rutrum
-faucibus dolor auctor. Praesent commodo cursus magna, vel scelerisque nisl
-consectetur et."
+socialImage: "images/favicon-32x32.png"
+subtitle: "Boilerplate for my frontend mentor projects"
+summary: "Boilerplate Project Using CubeCSS, Eleventy, PostCSS, and Taskfiles"
 
 layout: "layouts/home.njk"
