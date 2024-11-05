@@ -1,8 +1,9 @@
 version: '3'
 
 includes:
-  dev: ./taskfiles/dev.yaml
+  utopia: ./taskfiles/utopia.yaml
   build: ./taskfiles/build.yaml
+  format: ./taskfiles/format.yaml
 
 tasks:
   default:
@@ -27,38 +28,15 @@ tasks:
     cmds:
       - task build:default
 
+  build:watch:
+    deps: [install, utopia, format:src, build:default]
+    watch: true
+
+  serve:
+    cmds:
+      - pnpm live-server --open=dist
+
   clean:
     cmds:
       - rm -rf ./dist
       - mkdir ./dist
-
-  format:
-    sources:
-      - src/_includes/**/*.{njk}
-      - src/css/**/*.css
-    generates:
-      - dist/css/*.css
-      - dist/*.html
-    deps:
-      - lint
-      - prettier
-
-  lint:
-    sources:
-      - src/_includes/**/*.{njk}
-      - src/css/**/*.css
-
-    cmds:
-      - pnpm stylelint src/css/**/*.css --fix
-
-  prettier:
-    sources:
-      - src/_includes/**/*.{njk}
-      - src/css/**/*.css
-    cmds:
-      - pnpm prettier ./ --write
-
-  utopia:
-    cmds:
-      - node utopia.local/src/index.js
-      - pnpm prettier src/design-tokens/
