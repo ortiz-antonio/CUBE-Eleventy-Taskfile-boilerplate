@@ -9,5 +9,11 @@ tasks:
       - ./dist/fonts/*
       - ./dist/images/*
     cmds:
-      - cp -r ./src/fonts ./dist
-      - cp -r ./src/images ./dist
+      - task assets:clean
+      - cp -r ./src/fonts/* ./dist/fonts
+      - cp -r ./src/images/* ./dist/images
+
+  clean:
+    cmds:
+      - rm -rf ./dist/fonts && mkdir -p /dist/fonts
+      - rm -rf ./dist/images && mkdir -p /dist/images
