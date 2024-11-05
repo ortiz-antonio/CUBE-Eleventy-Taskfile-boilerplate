@@ -1,17 +1,7 @@
 version: '3'
 
-includes:
-  assets: ./assets.yaml
-  format: ./format.yaml
-
 tasks:
-  default:
-    cmds:
-      - task build:site
-      - task format:dist
-
   site:
-    deps: [assets]
     sources:
       - src/_includes/**/*.{njk}
       - src/css/**/*.css

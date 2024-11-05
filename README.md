@@ -5,4 +5,7 @@ Thank you!
 
 ## Getting started
 
-After running `task setup` run `task install` then `task dev`. This will serve up a local version of the HTML page and watch for CSS changes.
+### RUN in console
+
+- `task setup`
+- `task dev`

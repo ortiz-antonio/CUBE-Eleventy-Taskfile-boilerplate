@@ -1,15 +1,8 @@
 version: '3'
 
-includes:
-  assets: ./assets.yaml
-
 tasks:
-  default:
-    cmds:
-      - task dev:start
-
   start:
-    deps: [assets, postcss, serve]
+    deps: [postcss, serve]
 
   serve:
     cmds:

@@ -1,11 +1,7 @@
 version: '3'
 
 tasks:
-  default:
-    cmds:
-      - task utopia:create_tokens
-
-  create_tokens:
+  tokens:
     sources:
       - utopia.local/config.js
     generates:

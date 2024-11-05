@@ -2,8 +2,10 @@ version: '3'
 
 includes:
   utopia: ./taskfiles/utopia.yaml
-  build: ./taskfiles/build.yaml
   format: ./taskfiles/format.yaml
+  assets: ./taskfiles/assets.yaml
+  build: ./taskfiles/build.yaml
+  dev: ./taskfiles/dev.yaml
 
 tasks:
   default:
@@ -23,18 +25,28 @@ tasks:
       - echo "Installing package.json deps"
       - pnpm install
 
+  dev:
+    deps: [install, assets:create, utopia:tokens, format:src]
+    cmds:
+      - task dev:start
+
+  build:deploy:
+    deps: [clean, install, assets:create]
+    cmds:
+      - task build:site
+      - task format:dist
+
   build:
-    deps: [clean, install]
+    deps: [install, assets:create, utopia:tokens, format:src]
     cmds:
-      - task build:default
+      - task build:site
+      - task format:dist
 
-  build:watch:
-    deps: [install, utopia, format:src, build:default]
+  resources:watch:
+    deps: [assets:create, utopia:tokens]
     watch: true
-
-  serve:
     cmds:
-      - pnpm live-server --open=dist
+      - task format:src:json
 
   clean:
     cmds:
