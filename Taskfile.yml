@@ -37,7 +37,7 @@ tasks:
       - task format:dist
 
   build:
-    deps: [build:deploy, utopia:tokens, format:src]
+    deps: [clean, build:deploy, utopia:tokens, format:src]
     cmds:
       - task build:site
       - task format:dist

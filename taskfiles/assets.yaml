@@ -2,19 +2,12 @@ version: '3'
 
 tasks:
   create:
-    deps: [clean:assets]
     sources:
       - ./src/fonts/**/*
       - ./src/images/**/*
-
     generates:
       - ./dist/fonts/*
       - ./dist/images/*
     cmds:
       - cp -r ./src/fonts ./dist
       - cp -r ./src/images ./dist
-
-  clean:assets:
-    cmds:
-      - rm -rf ./dist/fonts
-      - rm -rf ./dist/images
