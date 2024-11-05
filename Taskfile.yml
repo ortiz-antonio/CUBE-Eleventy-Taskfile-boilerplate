@@ -45,8 +45,6 @@ tasks:
   resources:watch:
     deps: [assets:create, utopia:tokens]
     watch: true
-    cmds:
-      - task format:src:json
 
   clean:
     cmds:
