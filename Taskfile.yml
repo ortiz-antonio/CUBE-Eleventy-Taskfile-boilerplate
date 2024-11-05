@@ -31,13 +31,13 @@ tasks:
       - task dev:start
 
   build:deploy:
-    deps: [clean, install, assets:create]
+    deps: [clean:assets, install, assets:create]
     cmds:
       - task build:site
       - task format:dist
 
   build:
-    deps: [install, assets:create, utopia:tokens, format:src]
+    deps: [build:deploy, utopia:tokens, format:src]
     cmds:
       - task build:site
       - task format:dist
@@ -52,3 +52,9 @@ tasks:
     cmds:
       - rm -rf ./dist
       - mkdir ./dist
+  clean:assets:
+    cmds:
+      - rm -rf ./dist/fonts
+      - rm -rf ./dist/images
+      - mkdir ./dist/fonts
+      - mkdir ./dist/images
