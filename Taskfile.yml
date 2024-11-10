@@ -1,12 +1,11 @@
 version: '3'
 
 includes:
-  utopia: ./taskfiles/utopia.yaml
   format: ./taskfiles/format.yaml
   assets: ./taskfiles/assets.yaml
   build: ./taskfiles/build.yaml
   dev: ./taskfiles/dev.yaml
-  utils: ./utils/utils.yaml
+  utils: ./utils/Taskfile.yaml
 
 tasks:
   default:
@@ -29,7 +28,6 @@ tasks:
   dev:
     deps: [install, assets:create]
     cmds:
-      - task utopia:tokens
       - task format:src
       - task dev:start
 
@@ -42,14 +40,13 @@ tasks:
   build:
     deps: [clean, install]
     cmds:
-      - build:deploy
-      - utopia:tokens
-      - format:src
+      - task build:deploy
+      - task format:src
       - task build:site
       - task format:dist
 
-  resources:watch:
-    deps: [assets:create, utopia:tokens]
+  utils:watch:
+    deps: [assets:create, utils:utopia:tokens]
     watch: true
 
   clean:

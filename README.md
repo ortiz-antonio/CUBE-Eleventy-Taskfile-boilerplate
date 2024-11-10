@@ -1,7 +1,7 @@
 # CUBE CSS Eleventy Taskfile Boilerplate
 
-This is a boilerplate for **me**, based on [Cube Boilerplate](https://github.com/Set-Creative-Studio/cube-boilerplate)
-Thank you!
+This is a boilerplate for **me**, based on [Cube Boilerplate](https://github.com/Set-Creative-Studio/cube-boilerplate) for my Frontend Mentor projects
+
 
 ## Getting started
 
@@ -10,5 +10,12 @@ Thank you!
 - `task setup`
 - `task dev`
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+## Solution
+
+- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/profile/ortiz-antonio)
+- Live Site URL: [GH Pages](https://ortiz-antonio.github.io/cube-eleventy-taskfile-boilerplate)
+
+## Author
+- Website - [Antonio Ortiz](https://ortiz.studio)
+- Frontend Mentor - [ortiz-antonio](https://www.frontendmentor.io/profile/ortiz-antonio)
+- Twitter - [@yourusername](https://www.twitter.com/yourusername)
