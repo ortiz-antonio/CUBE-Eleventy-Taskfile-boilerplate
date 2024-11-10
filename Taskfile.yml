@@ -26,8 +26,10 @@ tasks:
       - pnpm install
 
   dev:
-    deps: [install, assets:create, utopia:tokens, format:src]
+    deps: [install, assets:create]
     cmds:
+      - task utopia:tokens
+      - task format:src
       - task dev:start
 
   build:deploy:
@@ -37,8 +39,11 @@ tasks:
       - task format:dist
 
   build:
-    deps: [clean, build:deploy, utopia:tokens, format:src]
+    deps: [clean, install]
     cmds:
+      - build:deploy
+      - utopia:tokens
+      - format:src
       - task build:site
       - task format:dist
 
