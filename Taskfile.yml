@@ -6,6 +6,7 @@ includes:
   assets: ./taskfiles/assets.yaml
   build: ./taskfiles/build.yaml
   dev: ./taskfiles/dev.yaml
+  utils: ./utils/utils.yaml
 
 tasks:
   default:
