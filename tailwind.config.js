@@ -3,6 +3,7 @@ const postcss = require('postcss');
 const postcssJs = require('postcss-js');
 
 const clampGenerator = require('./src/css-utils/clamp-generator.js');
+const viewportToRem = require('./src/css-utils/viewport-to-rem.js');
 const tokensToTailwind = require('./src/css-utils/tokens-to-tailwind.js');
 
 // Raw design tokens
@@ -21,25 +22,23 @@ const fontWeight = tokensToTailwind(textWeightTokens.items);
 const fontSize = tokensToTailwind(clampGenerator(textSizeTokens.items));
 const lineHeight = tokensToTailwind(textLeadingTokens.items);
 const spacing = tokensToTailwind(clampGenerator(spacingTokens.items));
-
-
+const viewport = tokensToTailwind(viewportToRem(viewportTokens.items));
+console.log(viewport);
 module.exports = {
   content: ['./src/**/*.{html,js,jsx,mdx,njk,twig,vue}'],
   // Add color classes to safe list so they are always generated
   safelist: [],
   presets: [],
   theme: {
-    screens: {
-      sm: `${viewportTokens.min}px`,
-      md: `${viewportTokens.mid}px`,
-      lg: `${viewportTokens.max}px`
-    },
+    screens: viewport
+    ,
     colors,
     spacing,
     fontSize,
     lineHeight,
     fontFamily,
     fontWeight,
+    viewport,
     backgroundColor: ({theme}) => theme('colors'),
     textColor: ({theme}) => theme('colors'),
     margin: ({theme}) => ({
@@ -96,7 +95,8 @@ module.exports = {
         {key: 'fontSize', prefix: 'size'},
         {key: 'lineHeight', prefix: 'leading'},
         {key: 'fontFamily', prefix: 'font'},
-        {key: 'fontWeight', prefix: 'font'}
+        {key: 'fontWeight', prefix: 'font'},
+        {key: 'viewport', prefix: 'breakpoint'}
       ];
 
       groups.forEach(({key, prefix}) => {
