@@ -5,7 +5,8 @@ includes:
   assets: ./taskfiles/assets.yaml
   build: ./taskfiles/build.yaml
   dev: ./taskfiles/dev.yaml
-  utils: ./utils/Taskfile.yaml
+  utils:readme: ./utils/readme/Taskfile.yaml
+  utils:utopia: ./utils/utopia/Taskfile.yaml
 
 tasks:
   default:
@@ -45,6 +46,7 @@ tasks:
       - task build:site
       - task format:dist
 
+      
   utils:watch:
     deps: [assets:create, utils:utopia:tokens]
     watch: true

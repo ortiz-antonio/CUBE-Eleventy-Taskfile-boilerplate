@@ -2,6 +2,7 @@ const plugin = require('tailwindcss/plugin');
 const postcss = require('postcss');
 const postcssJs = require('postcss-js');
 
+const clampGenerator = require('./src/css-utils/clamp-generator.js');
 const tokensToTailwind = require('./src/css-utils/tokens-to-tailwind.js');
 
 // Raw design tokens
@@ -17,9 +18,10 @@ const viewportTokens = require('./src/design-tokens/viewports.json');
 const colors = tokensToTailwind(colorTokens.items);
 const fontFamily = tokensToTailwind(fontTokens.items);
 const fontWeight = tokensToTailwind(textWeightTokens.items);
-const fontSize = tokensToTailwind(textSizeTokens.items);
+const fontSize = tokensToTailwind(clampGenerator(textSizeTokens.items));
 const lineHeight = tokensToTailwind(textLeadingTokens.items);
-const spacing = tokensToTailwind(spacingTokens.items);
+const spacing = tokensToTailwind(clampGenerator(spacingTokens.items));
+
 
 module.exports = {
   content: ['./src/**/*.{html,js,jsx,mdx,njk,twig,vue}'],
