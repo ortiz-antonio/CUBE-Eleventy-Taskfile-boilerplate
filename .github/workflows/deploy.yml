@@ -9,17 +9,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
+        
       - name: Install Task
         uses: arduino/setup-task@v2
         with:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Run Taskfile - build
         run: task build:deploy
+        
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+
+      - name: Update About Section
+        if: ${{ success() }}
+        env:
+          REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "${GITHUB_TOKEN}" | gh auth login --with-token
+          gh repo edit "$REPO" \
+            --description "$(jq -r '.summary' ../../utils/project.json)" \
+            --homepage "https://ortiz-antonio.github.io/$(jq -r '.key' ../../utils/project.json)"
