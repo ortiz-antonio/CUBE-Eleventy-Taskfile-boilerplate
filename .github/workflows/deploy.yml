@@ -32,9 +32,10 @@ jobs:
         if: ${{ success() }}
         env:
           REPO: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "${GITHUB_TOKEN}" | gh auth login --with-token
-          gh repo edit "$REPO" \
-            --description "$(jq -r '.summary' ../../utils/project.json)" \
-            --homepage "https://ortiz-antonio.github.io/$(jq -r '.key' ../../utils/project.json)"
+          gh api \
+            -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -F "description=$(jq -r '.summary' utils/project.json)" \
+            -F "homepage=https://ortiz-antonio.github.io/$(jq -r '.key' utils/project.json)" \
+            /repos/"$REPO"
