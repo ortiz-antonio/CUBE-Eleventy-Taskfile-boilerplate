@@ -1,4 +1,6 @@
-const viewports = require('../design-tokens/viewports.json');
+const viewportTokens = require('../design-tokens/viewports.json');
+const tokensToTailwind = require('./tokens-to-tailwind.js');
+const viewport = tokensToTailwind(viewportTokens.items);
 
 /**
  * Takes an array of tokens and sends back and array of name
@@ -20,8 +22,8 @@ const clampGenerator = tokens => {
     const maxSize = max / rootSize;
 
     // Convert the pixel viewport sizes into rems
-    const minViewport = viewports.items[0].px / rootSize;
-    const maxViewport = viewports.items[2].px / rootSize;
+    const minViewport = viewport["sm"] / rootSize;
+    const maxViewport = viewport["lg"] / rootSize;
 
     // Slope and intersection allow us to have a fluid value but also keep that sensible
     const slope = (maxSize - minSize) / (maxViewport - minViewport);

@@ -10,10 +10,10 @@ const viewports = require('../design-tokens/viewports.json');
 const viewportToRem = tokens => {
   const rootSize = 16;
 
-  return tokens.map(({name, px}) => {
+  return tokens.map(({name, value}) => {
 
     // Convert the px sizes to rems
-    const size = px / rootSize;
+    const size = value / rootSize;
 
     return {
       name,
