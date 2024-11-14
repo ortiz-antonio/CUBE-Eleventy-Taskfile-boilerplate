@@ -39,6 +39,5 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
           /repos/"$REPO" \
-          -F "name=$(jq -r '.name' project-tokens/project.json)" \
           -F "description=$(jq -r '.summary' project-tokens/project.json)" \
           -F "homepage=https://ortiz-antonio.github.io/$(jq -r '.key' project-tokens/project.json)" 
