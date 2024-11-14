@@ -36,6 +36,6 @@ jobs:
           gh api \
             -X PATCH \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -F "description=$(jq -r '.summary' project.json)" \
-            -F "homepage=https://ortiz-antonio.github.io/$(jq -r '.key' project.json)" \
+            -F "description=$(jq -r '.summary' ./project.json)" \
+            -F "homepage=https://ortiz-antonio.github.io/$(jq -r '.key' ./project.json)" \
             /repos/"$REPO"
