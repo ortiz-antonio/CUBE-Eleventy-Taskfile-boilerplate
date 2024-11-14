@@ -1,5 +1,7 @@
 version: '3'
 
+dotenv: ['.env']
+
 includes:
   format: ./taskfiles/format.yaml
   assets: ./taskfiles/assets.yaml
@@ -7,6 +9,7 @@ includes:
   dev: ./taskfiles/dev.yaml
   utils:readme: ./utils/readme/Taskfile.yaml
   utils:utopia: ./utils/utopia/Taskfile.yaml
+  utils:gh-about: ./utils/gh-about/Taskfile.yaml
 
 tasks:
   default:

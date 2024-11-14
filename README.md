@@ -13,9 +13,8 @@ This is a boilerplate for **me**, based on [Cube Boilerplate](https://github.com
 ## Solution
 
 - Solution URL: [Frontend Mentor](https://www.frontendmentor.io/profile/ortiz-antonio)
-- Live Site URL: [GH Pages](https://ortiz-antonio.github.io/cube-eleventy-taskfile-boilerplate)
+- Live Site URL: [GH Pages](https://ortiz-antonio.github.io/CUBE-Eleventy-Taskfile-boilerplate)
 
 ## Author
 - Website - [Antonio Ortiz](https://ortiz.studio)
-- Frontend Mentor - [ortiz-antonio](https://www.frontendmentor.io/profile/ortiz-antonio)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Frontend Mentor - 
