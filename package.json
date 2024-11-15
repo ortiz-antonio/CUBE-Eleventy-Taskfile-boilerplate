@@ -1,12 +1,12 @@
 {
+  "name": "CUBE-Eleventy-Taskfile-boilerplate",
+  "description": "This is a boilerplate for my Frontend Mentor projects, based on Andy Bell Cube BoilerPlate",
   "keywords": [],
   "author": {
     "name": "Antonio Ortiz",
     "username": "ortiz-antonio",
     "url": "https://ortiz.studio"
   },
-  "name": "CUBE-Eleventy-Taskfile-boilerplate",
-  "description": "This is a boilerplate for my Frontend Mentor projects, based on Andy Bell Cube BoilerPlate",
   "license": "ISC",
   "packageManager": "pnpm@9.12.3",
   "dependencies": {

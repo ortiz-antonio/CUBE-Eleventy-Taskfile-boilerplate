@@ -7,9 +7,9 @@ includes:
   assets: ./taskfiles/assets.yaml
   build: ./taskfiles/build.yaml
   dev: ./taskfiles/dev.yaml
-  utils:readme: ./utils/readme/Taskfile.yaml
-  utils:utopia: ./utils/utopia/Taskfile.yaml
-  utils:gh-about: ./utils/gh-about/Taskfile.yaml
+  utils:readme: ./taskfiles/readme/Taskfile.yaml
+  utils:utopia: ./taskfiles/utopia/Taskfile.yaml
+  utils:gh-about: ./taskfiles/gh-about/Taskfile.yaml
 
 tasks:
   default:
