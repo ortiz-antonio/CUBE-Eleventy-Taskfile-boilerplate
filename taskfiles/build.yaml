@@ -8,8 +8,8 @@ includes:
 tasks:
   default:
     deps:
-      - task: setup:install
       - task: setup:clean
+      - task: setup:install
       - task: assets:create
       - task: format:src
     sources:
@@ -25,6 +25,6 @@ tasks:
       - task: format:dist
 
   deploy:
-    deps: [build]
+    deps: [default]
     cmds:
       - pnpm gh-pages -d dist -b deploy
