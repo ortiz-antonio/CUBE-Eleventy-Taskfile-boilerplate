@@ -10,8 +10,6 @@ tasks:
     deps:
       - task: setup:clean
       - task: setup:install
-      - task: assets:create
-      - task: format:src
     sources:
       - src/_includes/**/*.{njk}
       - src/css/**/*.css
@@ -20,6 +18,8 @@ tasks:
       - dist/index.html
       - dist/css/global.css
     cmds:
+      - task: assets:create
+      - task: format:src
       - pnpm eleventy
       - pnpm postcss src/css/global.css -o dist/css/global.css
       - task: format:dist
