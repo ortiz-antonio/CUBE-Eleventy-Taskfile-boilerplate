@@ -6,7 +6,8 @@ includes:
   build: ./taskfiles/build.yaml
   dev: ./taskfiles/dev.yaml
   setup: ./taskfiles/setup.yaml
-
+  format: ./taskfiles/format.yaml
+  
 tasks:
   default:
     - task -a
@@ -19,5 +20,5 @@ tasks:
       
   clean:
     cmds:
-      - rm -rf ./dist
+      - rm -rf ./dist node_modules .task
       - mkdir ./dist
