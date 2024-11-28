@@ -13,8 +13,8 @@ tasks:
       - task: postcss
       - task: serve
       - task: assets:create
-      - task: format:src
     cmds:
+      - task: format:src
       - task: format:dist
 
   serve:
