@@ -12,6 +12,12 @@ tasks:
   default:
     - task -a
 
+  pre-commit:
+    aliases: [pc]
+    cmds:
+      - task: build
+      - task: format
+
   deploy:
     cmds:
       - task: clean
