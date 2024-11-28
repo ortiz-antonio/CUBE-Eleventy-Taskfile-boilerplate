@@ -7,7 +7,7 @@ includes:
 tasks:
   default:
     env:
-      NODE_ENV: prod
+      NODE_ENV: ""
     deps:
       - task: clean
       - task: setup:install
@@ -19,10 +19,10 @@ tasks:
       - dist/index.html
       - dist/css/global.css
     cmds:
+      - echo {{.NODE_ENV}}
       - task: assets:create
       - pnpm eleventy
       - pnpm postcss src/css/global.css -o dist/css/global.css
-#      - task: format:dist
 
   deploy:
     cmds:

@@ -17,4 +17,4 @@ tasks:
       - pnpm-lock.yaml
     cmds:
       - echo "Installing package.json deps"
-      - pnpm install {{.CLI_ARGS}}
+      - pnpm install --{{.NODE_ENV}}
