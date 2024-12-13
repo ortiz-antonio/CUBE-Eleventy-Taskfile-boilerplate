@@ -1,19 +1,19 @@
-const plugin = require('tailwindcss/plugin');
-const postcss = require('postcss');
-const postcssJs = require('postcss-js');
+const plugin = require("tailwindcss/plugin");
+const postcss = require("postcss");
+const postcssJs = require("postcss-js");
 
-const clampGenerator = require('./src/css-utils/clamp-generator.js');
-const viewportToRem = require('./src/css-utils/viewport-to-rem.js');
-const tokensToTailwind = require('./src/css-utils/tokens-to-tailwind.js');
+const clampGenerator = require("./src/css-utils/clamp-generator.js");
+const viewportToRem = require("./src/css-utils/viewport-to-rem.js");
+const tokensToTailwind = require("./src/css-utils/tokens-to-tailwind.js");
 
 // Raw design tokens
-const colorTokens = require('./src/design-tokens/colors.json');
-const fontTokens = require('./src/design-tokens/fonts.json');
-const spacingTokens = require('./src/design-tokens/spacing.json');
-const textSizeTokens = require('./src/design-tokens/text-sizes.json');
-const textLeadingTokens = require('./src/design-tokens/text-leading.json');
-const textWeightTokens = require('./src/design-tokens/text-weights.json');
-const viewportTokens = require('./src/design-tokens/viewports.json');
+const colorTokens = require("./src/design-tokens/colors.json");
+const fontTokens = require("./src/design-tokens/fonts.json");
+const spacingTokens = require("./src/design-tokens/spacing.json");
+const textSizeTokens = require("./src/design-tokens/text-sizes.json");
+const textLeadingTokens = require("./src/design-tokens/text-leading.json");
+const textWeightTokens = require("./src/design-tokens/text-weights.json");
+const viewportTokens = require("./src/design-tokens/viewports.json");
 
 // Process design tokens
 const colors = tokensToTailwind(colorTokens.items);
@@ -25,13 +25,12 @@ const spacing = tokensToTailwind(clampGenerator(spacingTokens.items));
 const viewport = tokensToTailwind(viewportToRem(viewportTokens.items));
 
 module.exports = {
-  content: ['./src/**/*.{html,js,jsx,mdx,njk,twig,vue}'],
+  content: ["./src/**/*.{html,js,jsx,mdx,njk,twig,vue}"],
   // Add color classes to safe list so they are always generated
   safelist: [],
   presets: [],
   theme: {
-    screens: viewport
-    ,
+    screens: viewport,
     colors,
     spacing,
     fontSize,
@@ -39,31 +38,31 @@ module.exports = {
     fontFamily,
     fontWeight,
     viewport,
-    backgroundColor: ({theme}) => theme('colors'),
-    textColor: ({theme}) => theme('colors'),
-    margin: ({theme}) => ({
-      auto: 'auto',
-      ...theme('spacing')
+    backgroundColor: ({ theme }) => theme("colors"),
+    textColor: ({ theme }) => theme("colors"),
+    margin: ({ theme }) => ({
+      auto: "auto",
+      ...theme("spacing"),
     }),
-    padding: ({theme}) => theme('spacing')
+    padding: ({ theme }) => theme("spacing"),
   },
   variantOrder: [
-    'first',
-    'last',
-    'odd',
-    'even',
-    'visited',
-    'checked',
-    'empty',
-    'read-only',
-    'group-hover',
-    'group-focus',
-    'focus-within',
-    'hover',
-    'focus',
-    'focus-visible',
-    'active',
-    'disabled'
+    "first",
+    "last",
+    "odd",
+    "even",
+    "visited",
+    "checked",
+    "empty",
+    "read-only",
+    "group-hover",
+    "group-focus",
+    "focus-within",
+    "hover",
+    "focus",
+    "focus-visible",
+    "active",
+    "disabled",
   ],
 
   // Disables Tailwind's reset and usage of rgb/opacity
@@ -71,75 +70,75 @@ module.exports = {
     preflight: false,
     textOpacity: false,
     backgroundOpacity: false,
-    borderOpacity: false
+    borderOpacity: false,
   },
 
   // Prevents Tailwind's core components
-  blocklist: ['container'],
+  blocklist: ["container"],
 
   // Prevents Tailwind from generating that wall of empty custom properties
   experimental: {
-    optimizeUniversalDefaults: true
+    optimizeUniversalDefaults: true,
   },
 
   plugins: [
     // Generates custom property values from tailwind config
-    plugin(function ({addComponents, config}) {
-      let result = '';
+    plugin(({ addComponents, config }) => {
+      let result = "";
 
       const currentConfig = config();
 
       const groups = [
-        {key: 'colors', prefix: 'color'},
-        {key: 'spacing', prefix: 'space'},
-        {key: 'fontSize', prefix: 'size'},
-        {key: 'lineHeight', prefix: 'leading'},
-        {key: 'fontFamily', prefix: 'font'},
-        {key: 'fontWeight', prefix: 'font'},
-        {key: 'viewport', prefix: 'breakpoint'}
+        { key: "colors", prefix: "color" },
+        { key: "spacing", prefix: "space" },
+        { key: "fontSize", prefix: "size" },
+        { key: "lineHeight", prefix: "leading" },
+        { key: "fontFamily", prefix: "font" },
+        { key: "fontWeight", prefix: "font" },
+        { key: "viewport", prefix: "breakpoint" },
       ];
 
-      groups.forEach(({key, prefix}) => {
+      groups.forEach(({ key, prefix }) => {
         const group = currentConfig.theme[key];
 
         if (!group) {
           return;
         }
 
-        Object.keys(group).forEach(key => {
+        Object.keys(group).forEach((key) => {
           result += `--${prefix}-${key}: ${group[key]};`;
         });
       });
 
       addComponents({
-        ':root': postcssJs.objectify(postcss.parse(result))
+        ":root": postcssJs.objectify(postcss.parse(result)),
       });
     }),
 
     // Generates custom utility classes
-    plugin(function ({addUtilities, config}) {
+    plugin(({ addUtilities, config }) => {
       const currentConfig = config();
       const customUtilities = [
-        {key: 'spacing', prefix: 'flow-space', property: '--flow-space'},
-        {key: 'spacing', prefix: 'region-space', property: '--region-space'},
-        {key: 'spacing', prefix: 'gutter', property: '--gutter'}
+        { key: "spacing", prefix: "flow-space", property: "--flow-space" },
+        { key: "spacing", prefix: "region-space", property: "--region-space" },
+        { key: "spacing", prefix: "gutter", property: "--gutter" },
       ];
 
-      customUtilities.forEach(({key, prefix, property}) => {
+      customUtilities.forEach(({ key, prefix, property }) => {
         const group = currentConfig.theme[key];
 
         if (!group) {
           return;
         }
 
-        Object.keys(group).forEach(key => {
+        Object.keys(group).forEach((key) => {
           addUtilities({
             [`.${prefix}-${key}`]: postcssJs.objectify(
-              postcss.parse(`${property}: ${group[key]}`)
-            )
+              postcss.parse(`${property}: ${group[key]}`),
+            ),
           });
         });
       });
-    })
-  ]
+    }),
+  ],
 };
